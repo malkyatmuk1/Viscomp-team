@@ -11,5 +11,13 @@ function get_data($url) {
 	curl_close($ch);
 	return $data;
 }
-echo get_data("https://www.google.bg/search?q=miro&start=10");
+$var= get_data("https://www.google.bg/search?q=miro&start=10");
+echo '<textarea class="box">'.$var.'</textarea>';
 ?>
+<style>
+    .box{
+        border: 1px solid #aaa; /*getting border*/
+        border-radius: 4px; /*rounded border*/
+        color: #000; /*text color*/
+    }
+</style>

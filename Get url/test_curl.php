@@ -12,12 +12,34 @@ function get_data($url) {
 	return $data;
 }
 $var= get_data("https://www.google.bg/search?q=miro&start=10");
-echo '<textarea class="box">'.$var.'</textarea>';
+//echo htmlspecialchars($var);var_dump(
+preg_match_all('~<a(.*?)href="http([^"]+)"(.*?)>~', $var, $matches);
+$i=0;
+$p=0;
+$links[100];
+$j=0;
+//while ($i<=sizeof($matches[2])) {
+	
+	
+	for($i=0;$i<sizeof($matches[2]);$i++)
+	{
+		$pieces = explode("http", $matches[2][i]);
+		for ($j=0; $j <sizeof($pieces); $j++) { 
+			$links[$p]=$pieces[$j];
+			$p++;
+
+		}
+	
+	}
+	echo var_dump($links);
+	/*for ($s=0; $s < sizeof($pieces); $s++) { 
+			$links[$s]=$pieces[$p];
+			$p = $p + 2;
+	}
+    echo var_dump($links);
+	$i++;
+}
+
+echo var_dump($matches[2]);
+*/
 ?>
-<style>
-    .box{
-        border: 1px solid #aaa; /*getting border*/
-        border-radius: 4px; /*rounded border*/
-        color: #000; /*text color*/
-    }
-</style>

@@ -12,12 +12,20 @@ function get_data($url) {
 	return $data;
 }
 $var= get_data("https://www.google.bg/search?q=miro&start=10");
-echo '<textarea class="box">'.$var.'</textarea>';
+global $matches,$pieces;
+$links =array();
+preg_match_all('~<a(.*?)href="http([^"]+)"(.*?)>~', $var, $matches);
+
+$length= count($matches[2]);
+	for($i=0;$i<$length;$i++)
+	{
+		 $pieces = explode("http", $matches[2][$i]);
+		for ($j=0; $j < count($pieces); $j++) {
+
+		 		if(strpos($pieces[$j],"www.google")===false) $links[]=$pieces[$j];
+		}
+	}
+for ($i=0; $i <count($links) ; $i++) {
+	echo $links[$i],'<br>';
+}
 ?>
-<style>
-    .box{
-        border: 1px solid #aaa; /*getting border*/
-        border-radius: 4px; /*rounded border*/
-        color: #000; /*text color*/
-    }
-</style>

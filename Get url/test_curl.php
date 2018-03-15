@@ -131,6 +131,7 @@ $length= count($links);
 	}
 	*/
 for ($i=0; $i <$length ; $i++) {
-	echo $links[$i],'<br>';
+	$dom=get_domain_name($links[$i]);
+	echo $dom,'<br>';
 }
 ?>

@@ -18,6 +18,8 @@ function get_domain_name($url)
 
 function get_links_from_page($url)
 {
+	if(strlen($url) == 0) return array();
+
 	$text = file_get_contents($url, false);
 	$ret = array();
 
@@ -70,6 +72,7 @@ function get_links_from_page($url)
 
 	$current_domain_name = get_domain_name($url);
 	if($current_domain_name[strlen($current_domain_name) - 1] != '/') $current_domain_name .= '/';
+	if($url[strlen($url) - 1] == '/') substr_replace($url, "", -1);
 
 	for($i = 0; $i < $length_of_string; $i++)
 	{
@@ -89,7 +92,8 @@ function get_links_from_page($url)
 			$current_url .= $text[$j];
 		}
 
-		$current_url = $current_domain_name . $current_url;
+		if(strlen($current_url) == 0 || $current_url[0] != '/') continue;
+		$current_url = $url . $current_url;
 
 		if(!$is_ok) continue;
 		array_push($ret, $current_url);

@@ -1,10 +1,11 @@
 <?php
+/*
 function isGoogle($dom)
 {
 	if(strrpos($dom, "google"))return true;
 	else return false;
 }
-
+*/
 function get_domain_name($url)
 {
 	$ret = "";
@@ -107,7 +108,8 @@ function get_links_from_page($url)
 	$ret = array_unique($ret);
 	return $ret;
 }
-function get_data($url) {
+function get_data($url)
+ {
 	$ch = curl_init();
 	$timeout = 5;
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -138,10 +140,10 @@ $length= count($links);
 for ($i=0; $i <$length ; $i++) {
 	$dom=get_domain_name($links[$i]);
 	echo $dom,'<br>';
+}
 	/*
 	if (!isGoogle($dom)) {
 		echo $dom,'<br>';
 	}
 */
-}
 ?>

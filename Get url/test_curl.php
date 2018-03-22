@@ -1,7 +1,7 @@
 <?php
 function isGoogle($dom)
 {
-	if(strpos($dom, "google"))return true;
+	if(strlen(strpos($dom, "google"))!=0)return true;
 	else return false;
 }
 
@@ -140,6 +140,6 @@ for ($i=0; $i <$length ; $i++) {
 	if (strlen($dom)!=0 && !isGoogle($dom)) {
 		echo $dom,'<br>';
 	}
-
+echo $dom,'<br>';
 }
 ?>

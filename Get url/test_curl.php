@@ -1,7 +1,7 @@
 <?php
 function isGoogle($dom)
 {
-	if(strlen(strpos($dom, "google"))!=0)return true;
+	if(strrpos($dom, "google"))return true;
 	else return false;
 }
 
@@ -137,9 +137,10 @@ $length= count($links);
 	*/
 for ($i=0; $i <$length ; $i++) {
 	$dom=get_domain_name($links[$i]);
-	if (strlen($dom)!=0 && !isGoogle($dom)) {
+	echo $dom,'<br>';
+	if (!isGoogle($dom)) {
 		echo $dom,'<br>';
 	}
-echo $dom,'<br>';
+
 }
 ?>

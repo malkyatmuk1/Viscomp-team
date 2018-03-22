@@ -121,7 +121,7 @@ function get_data($url) {
 }
 $links =array();
 $links= get_links_from_page("https://www.google.bg/search?q=miro&start=10");
-global $matches,$pieces;
+global $matches,$pieces;s
 
 preg_match_all('~<cite class= "_Rm">([^"]+)"(.*?)</cite>~', $var, $matches);
 

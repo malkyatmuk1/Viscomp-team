@@ -138,9 +138,10 @@ $length= count($links);
 for ($i=0; $i <$length ; $i++) {
 	$dom=get_domain_name($links[$i]);
 	echo $dom,'<br>';
+	/*
 	if (!isGoogle($dom)) {
 		echo $dom,'<br>';
 	}
-
+*/
 }
 ?>

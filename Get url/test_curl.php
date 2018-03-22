@@ -1,4 +1,9 @@
 <?php
+function isGoogle($dom)
+{
+	if(strpos($dom, "google"))return true;
+	else return false;
+}
 
 function get_domain_name($url)
 {
@@ -132,6 +137,9 @@ $length= count($links);
 	*/
 for ($i=0; $i <$length ; $i++) {
 	$dom=get_domain_name($links[$i]);
-	echo $dom,'<br>';
+	if (!$dom.length() && !isGoogle($dom)) {
+		echo $dom,'<br>';
+	}
+
 }
 ?>

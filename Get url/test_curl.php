@@ -1,11 +1,11 @@
 <?php
-/*
+
 function isGoogle($dom)
 {
-	if(strrpos($dom, "google"))return true;
+	if(strrpos($dom, ".google"))return true;
 	else return false;
 }
-*/
+
 function get_domain_name($url)
 {
 	$ret = "";
@@ -51,7 +51,7 @@ function get_links_from_page($url)
 		}
 
 		if(!$is_ok) continue;
-		array_push($ret, $current_url);
+		if($current_url != "") array_push($ret, $current_url);
 	}
 
 	for($i = 0; $i < $length_of_string; $i++)
@@ -73,7 +73,7 @@ function get_links_from_page($url)
 		}
 
 		if(!$is_ok) continue;
-		array_push($ret, $current_url);
+		if($current_url != "") array_push($ret, $current_url);
 	}
 
 	$current_domain_name = get_domain_name($url);
@@ -102,48 +102,33 @@ function get_links_from_page($url)
 		$current_url = $url . $current_url;
 
 		if(!$is_ok) continue;
-		array_push($ret, $current_url);
+		if($current_url != "")array_push($ret, $current_url);
 	}
 
 	$ret = array_unique($ret);
 	return $ret;
 }
-function get_data($url)
- {
-	$ch = curl_init();
-	$timeout = 5;
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0(X11; Linux x86_64;rv:10.0) Gecko/20100101 Firefox/10.0');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, array('custom-header-name: custom-header-value','another-custom-header: another value')); //setting custom header
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$data = curl_exec($ch);
-	curl_close($ch);
-	return $data;
-}
-$links =array();
-$links= get_links_from_page("https://www.google.bg/search?q=miro&start=10");
-global $matches,$pieces;s
 
-preg_match_all('~<cite class= "_Rm">([^"]+)"(.*?)</cite>~', $var, $matches);
+global $links ;
+$links=array();
+//url for website
+$links= get_links_from_page($url);
 
-$length= count($links);
-	/*for($i=0;$i<$length;$i++)
-	{
-		 $pieces = explode("http", $matches[2][$i]);
-		for ($j=0; $j < count($pieces); $j++) {
+$new_links = array();
 
-		 		if(strpos($pieces[$j],"www.google")===false) $links[]=$pieces[$j];
-		}
+foreach($links as $link)
+{
+	$dom = get_domain_name($link);
+	if(!isGoogle($dom)){
+		if($dom != "") array_push($new_links, $dom);
 	}
-	*/
-for ($i=0; $i <$length ; $i++) {
-	$dom=get_domain_name($links[$i]);
-	echo $dom,'<br>';
 }
-	/*
-	if (!isGoogle($dom)) {
-		echo $dom,'<br>';
-	}
-*/
+
+$a=array();
+$new_links= array_unique($new_links);
+
+foreach($new_links as $link){
+	echo $link, "\n";
+}
+
 ?>

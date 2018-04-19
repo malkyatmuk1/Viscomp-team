@@ -3,7 +3,7 @@
 $url = $_POST['url'];
 function isGoogle($dom)
 {
-	if(strrpos($dom, ".google")|| strrpos($dom,"gstatic") || strrpos($dom,"youtube") || strrpos($dom,"blogger"))return true;
+	if(strrpos($dom, ".google")|| strrpos($dom,"gstatic") || strrpos($dom,"youtube") || strrpos($dom,"blogger") || strrpos($dom, "facebook") || strrpos($dom, "schema"))return true;
 	else return false;
 }
 function get_domain_name($url)
@@ -94,7 +94,7 @@ function get_links_from_page($url)
 $links=array();
 //url for website
 $main_url="https://www.google.bg/search?q=".$url."&start=10";
-$links= get_links_from_page($main_url);
+$links= get_links_from_page("https://www.google.bg/search?q=miro&start=10");
 $new_links = array();
 foreach($links as $link)
 {

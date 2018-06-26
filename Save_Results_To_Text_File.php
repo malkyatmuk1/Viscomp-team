@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "proekt";
+  $username = "omgproekt";
+  $password = "omg2018!";
+  $dbname = "omgproekt";
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
@@ -109,45 +109,51 @@ function get_links_from_page($url)
 }
 
 
-$keywordsFile = fopen("results.txt", 'a+');
-$links=array();
-
 $sql = "SELECT Name FROM ex_keywords";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    $keywordsFile = fopen("results.txt", 'a+');
     // output data of each row
-    while($row = $result->fetch_assoc()) {
+
+	$str_l = "";
+
+	while($row = $result->fetch_assoc()) {
 
 
         $url = $row["Name"];
-        fwrite($keywordsFile, $url . "\n" . "\n");
-        $main_url="https://www.google.bg/search?q=".$url."&start=10";
+        //fwrite($keywordsFile, $url . "\n" . "\n");
+        $main_url="https://www.google.de/search?q=".$url."&start=10";
         $links= get_links_from_page($main_url);
 
-        $new_links = array();
-        foreach($links as $link)
+        $new_links = $links; //array();
+	foreach($links as $link)
         {
             $dom = get_domain_name($link);
             if(!isGoogle($dom))
             {
                 if($dom != "") array_push($new_links, $dom);
             }
-        }
-        $new_links= array_unique($new_links);
+	}
+    
+       
+	$new_links= array_unique($new_links);
         foreach($new_links as $link){
-            fwrite($keywordsFile, $link . "\n");
-        }
-        fwrite($keywordsFile, "\n");
+            //fwrite($keywordsFile, $link . "\n");
+	$str_l = $str_l . $link;
+	}
+        //fwrite($keywordsFile, "\n");
+	$str_l = $str_l . "\n";
 
+	}
 
-    }
+	echo file_put_contents("links.txt", $str_l);
+
+    
 } else {
     echo "0 results";
 }
 
-fclose($keywordsFile);
+//fclose($keywordsFile);
 $conn->close();
 
 

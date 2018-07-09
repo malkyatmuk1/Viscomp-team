@@ -114,7 +114,6 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
-
 	$str_l = "";
 
 	while($row = $result->fetch_assoc()) {
@@ -134,21 +133,19 @@ if ($result->num_rows > 0) {
                 if($dom != "") array_push($new_links, $dom);
             }
 	}
-    
-       
+
+
 	$new_links= array_unique($new_links);
-        foreach($new_links as $link){
-            //fwrite($keywordsFile, $link . "\n");
-	$str_l = $str_l . $link;
-	}
-        //fwrite($keywordsFile, "\n");
-	$str_l = $str_l . "\n";
+  $str_l="";
+  foreach($new_links as $link){
+    //fwrite($keywordsFile, $link . "\n");
+	  $str_l = $str_l . $link;
+    $str_l = $str_l . "\n";
+  }
+   file_put_contents("links.txt", $str_l, FILE_APPEND);
 
-	}
+}
 
-	echo file_put_contents("links.txt", $str_l);
-
-    
 } else {
     echo "0 results";
 }

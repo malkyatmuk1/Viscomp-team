@@ -142,7 +142,8 @@ if ($result->num_rows > 0) {
 	  $str_l = $str_l . $link;
     $str_l = $str_l . "\n";
   }
-   file_put_contents("links_p.txt", $str_l, FILE_APPEND);
+  echo $str_l;
+  // file_put_contents("links_p.txt", $str_l, FILE_APPEND);
 
 }
 

@@ -110,7 +110,11 @@ function get_links_from_page($url)
 }
 
 $sql = "SELECT Name FROM ex_keywords";
+$result = $conn->query($sql);
 
+if ($result->num_rows > 0) {
+    // output data of each row
+	$str_l = "";
 $result = mysqli_query($conn, $sql);
 $links=array();
 
@@ -136,8 +140,7 @@ if (mysqli_num_rows($result) > 0)
 	    $dom = get_domain_name($link);	
             if(!isGoogle($dom))
             {
-                if($dom != "") array_push($new_links, $dom);
-	    }
+                if($dom != "") array_push($new_links, $dom);	    }
 
 	 }
 
@@ -153,10 +156,9 @@ if (mysqli_num_rows($result) > 0)
 }
 
 
-	 
-else {
-
-    echo "0 results";
+ 
+} else {
+    	echo "0 results";
 }
 
 

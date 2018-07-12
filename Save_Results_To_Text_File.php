@@ -108,24 +108,25 @@ $sql = "SELECT Name FROM ex_keywords";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // output data of each row
+
 	$str_l = "";
 $result = mysqli_query($conn, $sql);
-$links=array();
+
 
 if (mysqli_num_rows($result) > 0)
 {
 
-	 //output data of each row
-	$str_l = "";
 
+	$str_l = "";
+echo "";
 	while($row = mysqli_fetch_assoc($result))
 	{
 		$url=$row["Name"];
-		//fwrite($keywordsFile, $url . "\n" . "\n");
+    $main_url="";
 		$main_url.="https://www.google.de/search?q=";
     $main_url.=$url;
     $main_url.="&start=10";
+    $links=array();
 		$links= get_links_from_page($main_url);
     $new_links= array();
     foreach($links as $link)
